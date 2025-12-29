@@ -10,147 +10,107 @@
 <a name="português"></a>
 ## 🇦🇴 Português
 
-O **Kudima API** é o backend de uma plataforma de prestação de serviços que conecta Clientes a Profissionais qualificados (canalizadores, eletricistas, mecânicos, etc.). Este projeto fornece uma API RESTful para o aplicativo Android e um Painel Administrativo Web para gestão do sistema.
+**Kudima** é uma plataforma digital que conecta clientes a prestadores de serviços qualificados, permitindo a visualização clara de ofertas e preços. O projeto visa preencher a lacuna no mercado de serviços locais, promovendo eficiência e confiança.
 
-### 🚀 Funcionalidades Principais
+### 📋 Contexto e Objetivos
 
-*   **API RESTful (Mobile)**:
-    *   **Autenticação**: Registo e Login para Clientes.
-    *   **Catálogo de Serviços**: Pesquisa de serviços por categoria ou profissional.
-    *   **Solicitações**: Criação de pedidos de serviço com orçamento acordado.
-    *   **Avaliações**: Sistema de rating e comentários após o serviço.
-*   **Painel Administrativo (Web)**:
-    *   Desenvolvido com **FilamentPHP**.
-    *   **Gestão de Usuários**:
-        *   Criação e edição de perfis de Profissionais (incluindo especialidades e foto).
-        *   Visualização e bloqueio de Clientes.
-    *   **Gestão de Categorias**: Definição das áreas de atuação.
-    *   **Gestão de Serviços**: Cadastro de serviços específicos e preços para profissionais.
+Atualmente, clientes enfrentam dificuldades em encontrar profissionais (eletricistas, canalizadores, mecânicos) e saber custos antecipadamente. O **Kudima** resolve isso com:
+- **Conexão Direta**: Clientes encontram profissionais por categoria.
+- **Transparência de Preços**: Profissionais definem seus catálogos de serviços e preços.
+- **Confiança**: Perfis detalhados e sistema de avaliações.
+- **Gestão Centralizada**: Os administradores moderam e garantem a qualidade da plataforma.
 
-### 🛠️ Tecnologias Utilizadas
+### 🚀 Funcionalidades (Âmbito)
 
-*   **Framework**: Laravel 9.x / 10.x
-*   **Admin Panel**: FilamentPHP v2
-*   **Banco de Dados**: MySQL
-*   **Autenticação API**: Laravel Sanctum
+*   **Para Clientes**:
+    *   Registo e Login.
+    *   Pesquisa de Profissionais e Serviços (com filtros por categoria e preço).
+    *   Solicitação de Serviço (registo do preço acordado).
+    *   Avaliação e Comentários pós-serviço.
+*   **Para Profissionais**:
+    *   Gestão de Perfil (Bio, Endereço, Foto).
+    *   **Catálogo de Serviços**: Criar/Editar serviços próprios com preços definidos.
+    *   Gestão de Solicitações (Aceitar/Recusar).
+*   **Para Administradores (Painel Web)**:
+    *   Gestão de Usuários (Clientes e Profissionais).
+    *   **Moderação de Serviços**: Visualizar, editar e remover qualquer serviço (Soft Delete).
+    *   Gestão de Categorias e Relatórios.
 
-### 📦 Instalação e Configuração
+### 🛠️ Arquitetura e Tecnologias
 
-1.  **Clonar o Repositório**:
+*   **Mobile**: React Native (Expo) - *Interface do Cliente/Profissional*.
+*   **Web Admin**: FilamentPHP (Laravel Blade) - *Painel de Gestão*.
+*   **Backend**: API RESTful em Laravel (PHP).
+*   **Banco de Dados**: MySQL.
+
+### 🗄️ Modelo de Dados Principal
+
+*   **Users**: `name`, `email`, `phone`, `role` ('cliente', 'profissional', 'admin').
+*   **Categories**: `name`, `image_url`.
+*   **Services**: `professional_id`, `category_id`, `name`, `description`, `price`, `active`, `deleted_at` (Soft Delete).
+*   **Service Requests**: `client_id`, `professional_id`, `service_id`, `agreed_price`, `status`.
+
+### 📦 Instalação
+
+1.  **Clonar e Instalar**:
     ```bash
     git clone https://github.com/seu-usuario/kudima-api.git
     cd kudima-api
-    ```
-
-2.  **Instalar Dependências**:
-    ```bash
     composer install
     ```
-
-3.  **Configurar Ambiente**:
+2.  **Configurar .env e Banco**:
     ```bash
     cp .env.example .env
-    # Configure as variáveis DB_DATABASE, DB_USERNAME, etc. no .env
-    ```
-
-4.  **Gerar Chave e Migrar**:
-    ```bash
     php artisan key:generate
     php artisan migrate
     ```
-
-5.  **Criar Usuário Admin**:
+3.  **Criar Admin e Rodar**:
     ```bash
     php artisan make:filament-user
-    ```
-
-6.  **Rodar o Servidor**:
-    ```bash
     php artisan serve
     ```
-
-### 🔗 Endpoints da API
-
-| Método | Endpoint | Descrição |
-| :--- | :--- | :--- |
-| `POST` | `/api/register` | Registo de novo cliente |
-| `POST` | `/api/login` | Autenticação no app |
-| `GET` | `/api/categories` | Lista de categorias |
-| `GET` | `/api/services` | Pesquisa de serviços (`?search=`, `?category_id=`) |
-| `GET` | `/api/professionals` | Lista de profissionais |
-| `POST` | `/api/requests` | Solicitar um serviço |
 
 ---
 
 <a name="english"></a>
 ## 🇺🇸 English
 
-**Kudima API** is the backend application for a service marketplace platform connecting Clients with skilled Professionals (plumbers, electricians, mechanics, etc.). It provides a RESTful API for the Android mobile app and a Web Administration Panel for system management.
+**Kudima** is a digital platform connecting clients with qualified service providers, offering clear visibility of services and pricing. The project aims to bridge the gap in the local service market, promoting efficiency and trust.
+
+### 📋 Context & Objectives
+
+Clients establish direct connections with professionals (electricians, plumbers, mechanics) with transparent pricing.
+- **Direct Connection**: Find professionals by category.
+- **Price Transparency**: Professionals define their service catalogs and prices.
+- **Trust**: Detailed profiles and rating system.
+- **Centralized Management**: Admin moderation ensures platform quality.
 
 ### 🚀 Key Features
 
-*   **RESTful API (Mobile)**:
-    *   **Auth**: Client registration and login.
-    *   **Service Catalog**: Search services by category or professional.
-    *   **Requests**: Create service requests with agreed pricing.
-    *   **Reviews**: Rating and comment system after service completion.
-*   **Administration Panel (Web)**:
-    *   Built with **FilamentPHP**.
-    *   **User Management**:
-        *   Create and edit Professional profiles (including specialties and photos).
-        *   View and block Client access.
-    *   **Category Management**: Define service categories.
-    *   **Service Management**: Manage specific services and pricing for professionals.
+*   **For Clients**:
+    *   Registration & Login.
+    *   Search Professionals & Services (filter by category, price).
+    *   Request Service (records agreed price).
+    *   Reviews & Ratings.
+*   **For Professionals**:
+    *   Profile Management (Bio, Address, Photo).
+    *   **Service Catalog**: Create/Edit own services with prices.
+    *   Request Management (Accept/Refuse).
+*   **For Administrators (Web Panel)**:
+    *   User Management (Clients & Professionals).
+    *   **Service Moderation**: View, edit, and remove any service (Soft Delete).
+    *   Category & Report Management.
 
-### 🛠️ Tech Stack
+### 🛠️ Architecture & Tech Stack
 
-*   **Framework**: Laravel 9.x / 10.x
-*   **Admin Panel**: FilamentPHP v2
-*   **Database**: MySQL
-*   **API Auth**: Laravel Sanctum
+*   **Mobile**: React Native (Expo) - *Client/Professional UI*.
+*   **Web Admin**: FilamentPHP (Laravel Blade) - *Management Panel*.
+*   **Backend**: Laravel RESTful API.
+*   **Database**: MySQL.
 
-### 📦 Installation & Setup
+### 🗄️ Core Data Model
 
-1.  **Clone Repository**:
-    ```bash
-    git clone https://github.com/your-username/kudima-api.git
-    cd kudima-api
-    ```
-
-2.  **Install Dependencies**:
-    ```bash
-    composer install
-    ```
-
-3.  **Environment Setup**:
-    ```bash
-    cp .env.example .env
-    # Configure DB_DATABASE, DB_USERNAME, etc. in .env
-    ```
-
-4.  **Generate Key & Migrate**:
-    ```bash
-    php artisan key:generate
-    php artisan migrate
-    ```
-
-5.  **Create Admin User**:
-    ```bash
-    php artisan make:filament-user
-    ```
-
-6.  **Run Server**:
-    ```bash
-    php artisan serve
-    ```
-
-### 🔗 API Endpoints
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/register` | Register new client |
-| `POST` | `/api/login` | App authentication |
-| `GET` | `/api/categories` | List categories |
-| `GET` | `/api/services` | Search services (`?search=`, `?category_id=`) |
-| `GET` | `/api/professionals` | List professionals |
-| `POST` | `/api/requests` | Request a service |
+*   **Users**: `name`, `email`, `phone`, `role`.
+*   **Categories**: `name`, `image_url`.
+*   **Services**: `professional_id`, `category_id`, `name`, `description`, `price`, `active`, `deleted_at`.
+*   **Service Requests**: `client_id`, `professional_id`, `service_id`, `agreed_price`, `status`.

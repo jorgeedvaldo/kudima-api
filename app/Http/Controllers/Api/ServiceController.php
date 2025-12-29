@@ -11,21 +11,26 @@ class ServiceController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Service::query()->where('active', true);
+        $query = Service::query();
 
         if ($request->has('category_id')) {
             $query->where('category_id', $request->category_id);
         }
 
         if ($request->has('professional_id')) {
-            $query->where('professional_id', $request->professional_id);
+            $query->whereHas('professionals', function ($q) use ($request) {
+                $q->where('users.id', $request->professional_id);
+            });
         }
 
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where('title', 'like', "%{$search}%");
+            $query->where('name', 'like', "%{$search}%");
         }
 
-        return response()->json($query->with(['professional', 'category'])->get());
+        // Return services with their category. 
+        // If specific professional data (price) is needed, it should be requested via a different endpoint or handled differently,
+        // but for now this restores functionality.
+        return response()->json($query->with(['category'])->get());
     }
 }

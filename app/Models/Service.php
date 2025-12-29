@@ -4,24 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Service extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'professional_id',
         'category_id',
-        'title',
+        'name',
         'description',
-        'price',
-        'duration_estimate',
-        'active',
     ];
 
-    public function professional()
+    public function professionals()
     {
-        return $this->belongsTo(User::class, 'professional_id');
+        return $this->belongsToMany(User::class, 'professional_service', 'service_id', 'professional_id')
+                    ->withPivot(['price', 'duration', 'active'])
+                    ->withTimestamps();
     }
 
     public function category()
