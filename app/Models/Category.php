@@ -15,4 +15,9 @@ class Category extends Model
     {
         return $this->belongsToMany(User::class, 'professional_categories', 'category_id', 'professional_user_id');
     }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
 }

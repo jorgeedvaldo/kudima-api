@@ -15,7 +15,9 @@ class ServiceRequest extends Model
         'category_id',
         'description',
         'status',
-        'scheduled_at'
+        'scheduled_at',
+        'service_id',
+        'agreed_price',
     ];
 
     protected $casts = [
@@ -35,6 +37,11 @@ class ServiceRequest extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
     }
 
     public function reviews()

@@ -1,64 +1,156 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Kudima API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Filament](https://img.shields.io/badge/Filament-Administrator-warning?style=for-the-badge)
 
-## About Laravel
+[Português](#português) | [English](#english)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<a name="português"></a>
+## 🇦🇴 Português
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+O **Kudima API** é o backend de uma plataforma de prestação de serviços que conecta Clientes a Profissionais qualificados (canalizadores, eletricistas, mecânicos, etc.). Este projeto fornece uma API RESTful para o aplicativo Android e um Painel Administrativo Web para gestão do sistema.
 
-## Learning Laravel
+### 🚀 Funcionalidades Principais
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+*   **API RESTful (Mobile)**:
+    *   **Autenticação**: Registo e Login para Clientes.
+    *   **Catálogo de Serviços**: Pesquisa de serviços por categoria ou profissional.
+    *   **Solicitações**: Criação de pedidos de serviço com orçamento acordado.
+    *   **Avaliações**: Sistema de rating e comentários após o serviço.
+*   **Painel Administrativo (Web)**:
+    *   Desenvolvido com **FilamentPHP**.
+    *   **Gestão de Usuários**:
+        *   Criação e edição de perfis de Profissionais (incluindo especialidades e foto).
+        *   Visualização e bloqueio de Clientes.
+    *   **Gestão de Categorias**: Definição das áreas de atuação.
+    *   **Gestão de Serviços**: Cadastro de serviços específicos e preços para profissionais.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🛠️ Tecnologias Utilizadas
 
-## Laravel Sponsors
+*   **Framework**: Laravel 9.x / 10.x
+*   **Admin Panel**: FilamentPHP v2
+*   **Banco de Dados**: MySQL
+*   **Autenticação API**: Laravel Sanctum
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 📦 Instalação e Configuração
 
-### Premium Partners
+1.  **Clonar o Repositório**:
+    ```bash
+    git clone https://github.com/seu-usuario/kudima-api.git
+    cd kudima-api
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+2.  **Instalar Dependências**:
+    ```bash
+    composer install
+    ```
 
-## Contributing
+3.  **Configurar Ambiente**:
+    ```bash
+    cp .env.example .env
+    # Configure as variáveis DB_DATABASE, DB_USERNAME, etc. no .env
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4.  **Gerar Chave e Migrar**:
+    ```bash
+    php artisan key:generate
+    php artisan migrate
+    ```
 
-## Code of Conduct
+5.  **Criar Usuário Admin**:
+    ```bash
+    php artisan make:filament-user
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6.  **Rodar o Servidor**:
+    ```bash
+    php artisan serve
+    ```
 
-## Security Vulnerabilities
+### 🔗 Endpoints da API
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/api/register` | Registo de novo cliente |
+| `POST` | `/api/login` | Autenticação no app |
+| `GET` | `/api/categories` | Lista de categorias |
+| `GET` | `/api/services` | Pesquisa de serviços (`?search=`, `?category_id=`) |
+| `GET` | `/api/professionals` | Lista de profissionais |
+| `POST` | `/api/requests` | Solicitar um serviço |
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<a name="english"></a>
+## 🇺🇸 English
+
+**Kudima API** is the backend application for a service marketplace platform connecting Clients with skilled Professionals (plumbers, electricians, mechanics, etc.). It provides a RESTful API for the Android mobile app and a Web Administration Panel for system management.
+
+### 🚀 Key Features
+
+*   **RESTful API (Mobile)**:
+    *   **Auth**: Client registration and login.
+    *   **Service Catalog**: Search services by category or professional.
+    *   **Requests**: Create service requests with agreed pricing.
+    *   **Reviews**: Rating and comment system after service completion.
+*   **Administration Panel (Web)**:
+    *   Built with **FilamentPHP**.
+    *   **User Management**:
+        *   Create and edit Professional profiles (including specialties and photos).
+        *   View and block Client access.
+    *   **Category Management**: Define service categories.
+    *   **Service Management**: Manage specific services and pricing for professionals.
+
+### 🛠️ Tech Stack
+
+*   **Framework**: Laravel 9.x / 10.x
+*   **Admin Panel**: FilamentPHP v2
+*   **Database**: MySQL
+*   **API Auth**: Laravel Sanctum
+
+### 📦 Installation & Setup
+
+1.  **Clone Repository**:
+    ```bash
+    git clone https://github.com/your-username/kudima-api.git
+    cd kudima-api
+    ```
+
+2.  **Install Dependencies**:
+    ```bash
+    composer install
+    ```
+
+3.  **Environment Setup**:
+    ```bash
+    cp .env.example .env
+    # Configure DB_DATABASE, DB_USERNAME, etc. in .env
+    ```
+
+4.  **Generate Key & Migrate**:
+    ```bash
+    php artisan key:generate
+    php artisan migrate
+    ```
+
+5.  **Create Admin User**:
+    ```bash
+    php artisan make:filament-user
+    ```
+
+6.  **Run Server**:
+    ```bash
+    php artisan serve
+    ```
+
+### 🔗 API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/register` | Register new client |
+| `POST` | `/api/login` | App authentication |
+| `GET` | `/api/categories` | List categories |
+| `GET` | `/api/services` | Search services (`?search=`, `?category_id=`) |
+| `GET` | `/api/professionals` | List professionals |
+| `POST` | `/api/requests` | Request a service |

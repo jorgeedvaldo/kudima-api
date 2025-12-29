@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfessionalController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Api\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Categories
     Route::get('/categories', [CategoryController::class, 'index']);
+
+    // Services
+    Route::get('/services', [ServiceController::class, 'index']);
 
     // Professionals
     Route::get('/professionals', [ProfessionalController::class, 'index']);
