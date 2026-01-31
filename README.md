@@ -211,3 +211,100 @@ Clients establish direct connections with professionals (electricians, plumbers,
 *   **Categories**: `name`, `image_url`.
 *   **Services**: `professional_id`, `category_id`, `name`, `description`, `price`, `active`, `deleted_at`.
 *   **Service Requests**: `client_id`, `professional_id`, `service_id`, `agreed_price`, `status`.
+
+### 📡 API Documentation
+
+The API follows the RESTful pattern and accepts/returns JSON. The endpoints below should be prefixed with the API base URL (e.g., `http://localhost:8000`).
+
+#### 🔐 Authentication (Public)
+
+**`POST /api/register`**
+*   **Description**: Register a new user.
+*   **Body**:
+    ```json
+    {
+      "name": "User Name",
+      "email": "email@example.com",
+      "phone": "923456789",
+      "password": "secure_password",
+      "password_confirmation": "secure_password",
+      "role": "client" // or "professional" (default: "client")
+    }
+    ```
+*   **Response (201)**: `{ "access_token": "...", "token_type": "Bearer", "user": {...} }`
+
+**`POST /api/login`**
+*   **Description**: Login and token retrieval.
+*   **Body**:
+    ```json
+    {
+      "email": "email@example.com",
+      "password": "secure_password"
+    }
+    ```
+*   **Response (200)**: `{ "access_token": "...", "token_type": "Bearer", "user": {...} }`
+
+#### 🛡️ Protected Endpoints
+*Requires Header*: `Authorization: Bearer <your_token>`
+
+**`POST /api/logout`**
+*   **Description**: Invalidates the current token.
+
+**`GET /api/user`**
+*   **Description**: Returns logged-in user data (includes profile if professional).
+
+**`GET /api/categories`**
+*   **Description**: Lists all categories.
+*   **Response**: `[ { "id": 1, "name": "...", "image_url": "..." }, ... ]`
+
+**`GET /api/services`**
+*   **Description**: Search for services.
+*   **Query Params**:
+    *   `category_id`: Filter by category.
+    *   `professional_id`: Services from a specific professional.
+    *   `search`: Search by service name.
+*   **Response**: List of services with category data.
+
+**`GET /api/professionals`**
+*   **Description**: Lists registered professionals.
+*   **Query Params**: `category_id` (Filter by competence).
+*   **Response**: List of users (role=professional) with profile and categories.
+
+**`GET /api/professionals/{id}`**
+*   **Description**: Full professional profile.
+*   **Response**: User data, `professionalProfile`, `professionalCategories`, `reviewsReceived`.
+
+**`GET /api/requests`**
+*   **Description**: Request history (client and professional view).
+*   **Response**: List of requests with status, client, professional, and category.
+
+**`POST /api/requests`**
+*   **Description**: Create a new service request.
+*   **Body**:
+    ```json
+    {
+      "professional_id": 1,
+      "category_id": 2,
+      "description": "Problem description...",
+      "scheduled_at": "2024-01-01 10:00:00" // Optional
+    }
+    ```
+*   **Response (201)**: Created request data (initial status: `pending`).
+
+**`PATCH /api/requests/{id}/status`**
+*   **Description**: Update request status.
+*   **Body**: `{"status": "accepted"}`
+*   **Values**: `accepted`, `rejected`, `completed`, `cancelled`.
+
+**`POST /api/reviews`**
+*   **Description**: Rate completed service.
+*   **Rules**: Only request client, status must be `completed`.
+*   **Body**:
+    ```json
+    {
+      "service_request_id": 15,
+      "rating": 5, // Integer 1-5
+      "comment": "Excellent service!"
+    }
+    ```
+*   **Response (201)**: Review created.
