@@ -50,7 +50,6 @@ class ServicesRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\AttachAction::make()
-                    ->preloadRecordSelect()
                     ->form(fn (Tables\Actions\AttachAction $action): array => [
                         Forms\Components\TextInput::make('price')
                             ->numeric()
