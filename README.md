@@ -70,6 +70,103 @@ Atualmente, clientes enfrentam dificuldades em encontrar profissionais (eletrici
     php artisan serve
     ```
 
+### 📡 Documentação da API
+
+A API segue o padrão RESTful e aceita/retorna JSON. Os endpoints abaixo devem ser prefixados com a URL base da API (ex: `http://localhost:8000`).
+
+#### 🔐 Autenticação (Público)
+
+**`POST /api/register`**
+*   **Descrição**: Registo de novo utilizador.
+*   **Body**:
+    ```json
+    {
+      "name": "Nome do Usuário",
+      "email": "email@exemplo.com",
+      "phone": "923456789",
+      "password": "senha_segura",
+      "password_confirmation": "senha_segura",
+      "role": "client" // ou "professional" (default: "client")
+    }
+    ```
+*   **Response (201)**: `{ "access_token": "...", "token_type": "Bearer", "user": {...} }`
+
+**`POST /api/login`**
+*   **Descrição**: Login e obtenção de token.
+*   **Body**:
+    ```json
+    {
+      "email": "email@exemplo.com",
+      "password": "senha_segura"
+    }
+    ```
+*   **Response (200)**: `{ "access_token": "...", "token_type": "Bearer", "user": {...} }`
+
+#### 🛡️ Endpoints Protegidos
+*Requer Header*: `Authorization: Bearer <seu_token>`
+
+**`POST /api/logout`**
+*   **Descrição**: Invalida o token atual.
+
+**`GET /api/user`**
+*   **Descrição**: Retorna dados do utilizador logado (inclui perfil se for profissional).
+
+**`GET /api/categories`**
+*   **Descrição**: Lista todas categorias.
+*   **Response**: `[ { "id": 1, "name": "...", "image_url": "..." }, ... ]`
+
+**`GET /api/services`**
+*   **Descrição**: Pesquisa de serviços.
+*   **Query Params**:
+    *   `category_id`: Filtrar por categoria.
+    *   `professional_id`: Serviços de um profissional específico.
+    *   `search`: Busca por nome do serviço.
+*   **Response**: Lista de serviços com dados da categoria.
+
+**`GET /api/professionals`**
+*   **Descrição**: Lista profissionais cadastrados.
+*   **Query Params**: `category_id` (Filtrar por competência).
+*   **Response**: Lista de usuários (role=professional) com perfil e categorias.
+
+**`GET /api/professionals/{id}`**
+*   **Descrição**: Perfil completo do profissional.
+*   **Response**: Dados do user, `professionalProfile`, `professionalCategories`, `reviewsReceived`.
+
+**`GET /api/requests`**
+*   **Descrição**: Histórico de solicitações (visão do cliente e profissional).
+*   **Response**: Lista de pedidos com status, cliente, profissional e categoria.
+
+**`POST /api/requests`**
+*   **Descrição**: Criar nova solicitação de serviço.
+*   **Body**:
+    ```json
+    {
+      "professional_id": 1,
+      "category_id": 2,
+      "description": "Descrição do problema...",
+      "scheduled_at": "2024-01-01 10:00:00" // Opcional
+    }
+    ```
+*   **Response (201)**: Dados do pedido criado (status inicial: `pending`).
+
+**`PATCH /api/requests/{id}/status`**
+*   **Descrição**: Atualizar status do pedido.
+*   **Body**: `{"status": "accepted"}`
+*   **Valores**: `accepted` (aceite), `rejected` (recusa), `completed` (conclusão), `cancelled` (cancelamento).
+
+**`POST /api/reviews`**
+*   **Descrição**: Avaliar serviço concluído.
+*   **Regras**: Apenas cliente do pedido, status deve ser `completed`.
+*   **Body**:
+    ```json
+    {
+      "service_request_id": 15,
+      "rating": 5, // Inteiro 1-5
+      "comment": "Serviço excelente!"
+    }
+    ```
+*   **Response (201)**: Review criada.
+
 ---
 
 <a name="english"></a>
