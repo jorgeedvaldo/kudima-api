@@ -30,6 +30,10 @@ class ServiceResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\FileUpload::make('image_url')
+                    ->image()
+                    ->directory('services')
+                    ->label('Service Image'),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('description')

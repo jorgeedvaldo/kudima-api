@@ -111,6 +111,18 @@ A API segue o padrão RESTful e aceita/retorna JSON. Os endpoints abaixo devem s
 **`GET /api/user`**
 *   **Descrição**: Retorna dados do utilizador logado (inclui perfil se for profissional).
 
+**`PUT /api/profile`**
+*   **Descrição**: Atualiza os dados do perfil do utilizador (nome, telefone, endereço).
+*   **Body** (opcionais):
+    ```json
+    {
+      "name": "Novo Nome",
+      "phone": "923111222",
+      "address": "Nova Morada, Luanda"
+    }
+    ```
+*   **Response (200)**: `{ "message": "Perfil atualizado com sucesso.", "user": {...} }`
+
 **`GET /api/categories`**
 *   **Descrição**: Lista todas categorias.
 *   **Response**: `[ { "id": 1, "name": "...", "image_url": "..." }, ... ]`
@@ -252,6 +264,18 @@ The API follows the RESTful pattern and accepts/returns JSON. The endpoints belo
 
 **`GET /api/user`**
 *   **Description**: Returns logged-in user data (includes profile if professional).
+
+**`PUT /api/profile`**
+*   **Description**: Updates the user's profile data (name, phone, address).
+*   **Body** (optional):
+    ```json
+    {
+      "name": "New Name",
+      "phone": "923111222",
+      "address": "New Address, Luanda"
+    }
+    ```
+*   **Response (200)**: `{ "message": "Perfil atualizado com sucesso.", "user": {...} }`
 
 **`GET /api/categories`**
 *   **Description**: Lists all categories.

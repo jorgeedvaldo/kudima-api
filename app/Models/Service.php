@@ -14,7 +14,16 @@ class Service extends Model
         'category_id',
         'name',
         'description',
+        'image_url',
     ];
+
+    public function getImageUrlAttribute($value)
+    {
+        if (!$value) {
+            return null;
+        }
+        return str_starts_with($value, 'http') ? $value : asset('storage/' . $value);
+    }
 
     public function professionals()
     {

@@ -28,6 +28,7 @@ class CategoryResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image_url')
                     ->image()
+                    ->directory('categories')
                     ->label('Category Image'),
                 Forms\Components\Textarea::make('description')
                     ->maxLength(65535),

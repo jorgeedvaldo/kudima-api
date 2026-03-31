@@ -28,6 +28,10 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\FileUpload::make('avatar_url')
+                    ->avatar()
+                    ->directory('avatars')
+                    ->label('Avatar'),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()

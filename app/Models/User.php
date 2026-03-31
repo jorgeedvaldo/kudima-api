@@ -23,7 +23,16 @@ class User extends Authenticatable
         'password',
         'phone',
         'role',
+        'avatar_url',
     ];
+
+    public function getAvatarUrlAttribute($value)
+    {
+        if (!$value) {
+            return null;
+        }
+        return str_starts_with($value, 'http') ? $value : asset('storage/' . $value);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

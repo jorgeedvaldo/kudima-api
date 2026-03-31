@@ -64,6 +64,45 @@ class AuthController extends Controller
         return $request->user()->load('professionalProfile');
     }
 
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|string|max:255',
+            'phone' => 'sometimes|string|max:20|unique:users,phone,' . $user->id,
+            'address' => 'sometimes|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        if ($request->has('name')) {
+            $user->name = $request->name;
+        }
+        if ($request->has('phone')) {
+            $user->phone = $request->phone;
+        }
+        $user->save();
+
+        if ($request->has('address')) {
+            // We save address in professionalProfile, if they are professional
+            // Or we could create a profile for clients as well if the app requires it.
+            // Assuming we only store it for professionals or just create the profile row anyway.
+            if ($user->role === 'professional') {
+                $profile = $user->professionalProfile()->firstOrCreate(['user_id' => $user->id]);
+                $profile->address = $request->address;
+                $profile->save();
+            }
+        }
+
+        return response()->json([
+            'message' => 'Perfil atualizado com sucesso.',
+            'user' => $user->load('professionalProfile')
+        ]);
+    }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
