@@ -70,6 +70,18 @@ Atualmente, clientes enfrentam dificuldades em encontrar profissionais (eletrici
     php artisan serve
     ```
 
+### 🖼️ Imagens e Avatares
+
+A API retorna links completos e prontos a usar (*URLs absolutas*) para todas as imagens, facilitando a apresentação no frontend (como no React Native com `<Image source={{ uri: user.avatar_url }} />`).
+
+As imagens são organizadas no Painel da Administração (Filament) e disponibilizadas nestes endpoints:
+
+*   **Avatares de Utilizadores**: O endpoint `GET /api/user` (e os endpoints de profissionais) retorna o campo `avatar_url` com a foto de perfil. Profissionais têm também `professional_profile.profile_picture_url`.
+*   **Imagens de Categorias**: O endpoint `GET /api/categories` fornece o `image_url` com a foto ou ícone associado à categoria.
+*   **Imagens de Serviços**: O endpoint `GET /api/services` traz no seu retorno o `image_url` para mostrar capas e ilustrações dos serviços.
+
+**Nota sobre *Uploads***: Atualmente, as imagens (de perfis, categorias e serviços) devem ser carregadas e geridas exclusivamente pelos Administradores através do **Painel Web (`/admin`)**.
+
 ### 📡 Documentação da API
 
 A API segue o padrão RESTful e aceita/retorna JSON. Os endpoints abaixo devem ser prefixados com a URL base da API (ex: `http://localhost:8000`).
@@ -223,6 +235,18 @@ Clients establish direct connections with professionals (electricians, plumbers,
 *   **Categories**: `name`, `image_url`.
 *   **Services**: `professional_id`, `category_id`, `name`, `description`, `price`, `active`, `deleted_at`.
 *   **Service Requests**: `client_id`, `professional_id`, `service_id`, `agreed_price`, `status`.
+
+### 🖼️ Images & Avatars
+
+The API naturally returns completely formatted external links (*absolute URLs*) for all images, allowing you to instantly use them in your frontend requests (e.g. `<Image source={{ uri: user.avatar_url }} />` in React Native).
+
+Images are centrally managed via the Filament Admin Panel and exposed in these endpoints:
+
+*   **User Avatars**: The `GET /api/user` endpoint (and professional listing endpoints) delivers the `avatar_url` field containing the profile picture. Professionals might also have `professional_profile.profile_picture_url`.
+*   **Category Images**: Exposes the `image_url` through `GET /api/categories` highlighting the category's given picture.
+*   **Service Images**: The `GET /api/services` endpoint fetches an `image_url` to graphically display the requested service.
+
+**Upload Note**: Currently, files (avatars, categories, services) can only be uploaded and managed by Administrators exclusively through the **Web Administration Panel (`/admin`)**.
 
 ### 📡 API Documentation
 
