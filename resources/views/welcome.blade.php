@@ -5,19 +5,45 @@
 
 <!-- Hero -->
 <section class="hero">
-    <div class="hero-content">
-        <div class="hero-badge">
-            <span class="dot"></span>
-            Plataforma de serviços em Angola
+    <!-- Animated shapes -->
+    <div class="hero-shapes">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+        <div class="hero-shape hero-shape-4"></div>
+        <div class="hero-shape hero-shape-5"></div>
+        <div class="hero-shape hero-shape-6"></div>
+    </div>
+
+    <div class="hero-grid">
+        <!-- Left: Text -->
+        <div class="hero-text">
+            <h1><span class="highlight">Kudima</span> — Aqui quem precisa encontra quem sabe fazer</h1>
+            <p class="subtitle">Uma plataforma para quem precisa contratar um profissional e para quem busca oportunidades de trabalho em Angola. Simples, rápido e seguro para todos!</p>
+            <div class="hero-buttons">
+                <a href="/cadastro" class="btn btn-primary btn-lg">Cadastrar como Profissional</a>
+                <a href="/login" class="btn btn-secondary btn-lg">Entrar na Plataforma</a>
+            </div>
+            <div class="hero-social-proof">
+                <div class="avatar-stack">
+                    <span>J</span><span>M</span><span>C</span><span>H</span><span>+</span>
+                </div>
+                <p><strong>Profissionais verificados</strong> já se registaram e estão a trabalhar. Aproveite agora!</p>
+            </div>
         </div>
-        <h1>Aqui quem precisa<br>encontra <span class="gradient">quem sabe fazer</span></h1>
-        <p class="subtitle">Uma plataforma para quem precisa contratar um profissional e para quem busca oportunidades de trabalho. Simples, rápido e seguro.</p>
-        <div class="hero-buttons">
-            <a href="/cadastro" class="btn btn-primary btn-lg">Cadastrar como Profissional</a>
-            <a href="/login" class="btn btn-secondary btn-lg">Entrar na Plataforma</a>
-        </div>
-        <div class="hero-image-container">
-            <img src="{{ asset('images/hero-workers.png') }}" alt="Profissionais Kudima">
+
+        <!-- Right: Image -->
+        <div class="hero-image-side">
+            <div class="hero-image-wrapper">
+                <img src="{{ asset('images/hero-workers.png') }}" alt="Profissionais Kudima">
+            </div>
+            <div class="hero-badge-float">
+                <div class="badge-icon">⭐</div>
+                <div class="badge-text">
+                    <strong>4.8 / 5.0</strong>
+                    <span>Avaliação média</span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -27,7 +53,7 @@
     <div class="section-header">
         <div class="tag">Como Funciona</div>
         <h2>Solicite serviços com total segurança</h2>
-        <p>No Kudima, profissionais verificados aceitam o seu pedido e você escolhe quem vai executar. Simples e transparente.</p>
+        <p>No Kudima, profissionais verificados aceitam o seu pedido e você escolhe quem vai executar.</p>
     </div>
     <div class="steps-grid">
         <div class="step-card">
@@ -94,7 +120,7 @@
     <div class="section-header">
         <div class="tag">Para Profissionais</div>
         <h2>Receba pedidos e aumente a sua renda</h2>
-        <p>Cadastre-se, defina os seus serviços e preços, e comece a receber pedidos reais de clientes na sua área.</p>
+        <p>Cadastre-se, defina os seus serviços e preços, e comece a receber pedidos reais.</p>
     </div>
     <div class="steps-grid">
         <div class="step-card">
