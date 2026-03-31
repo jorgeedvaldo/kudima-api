@@ -27,3 +27,8 @@ Route::get('/login', function () {
 Route::get('/cadastro', function () {
     return view('pages.cadastro');
 });
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+    return 'Storage linked successfully';
+});
